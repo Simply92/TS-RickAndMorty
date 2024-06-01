@@ -5,13 +5,16 @@ import Swal from "sweetalert2"
 
 export type CharacterSliceType = {
     characters: Character[]
+    characterId: Character | null
     fetchCharacter: (id: number) => Promise<void>
     characterExist: (id: number) => boolean
     onClose: (id: number) => void
+    characterById: (id: number) => Promise<void>
 }
 
 export const createCharacterSlice: StateCreator<CharacterSliceType> = (set, get) => ({
     characters: [] as Character[],
+    characterId: null,
     fetchCharacter: async (id) => {
         const newCharacter = await getCharacter(id)
         if (newCharacter) {
@@ -30,6 +33,14 @@ export const createCharacterSlice: StateCreator<CharacterSliceType> = (set, get)
     },
     characterExist: (id) => {
         return get().characters.some(character => character.id === id)
+    },
+    characterById: async (id) => {
+        const newCharacter = await getCharacter(id)
+        if (newCharacter) {
+            set(() => ({
+                characterId: newCharacter
+            }))
+        }
     },
     onClose: (id) => {
         set((state) => ({
