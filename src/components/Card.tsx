@@ -1,6 +1,7 @@
 
 import { Link } from "react-router-dom"
 import { Character } from "../types"
+import { useAppStore } from "../stores/useAppStore"
 
 type CardProps = {
   character: Character
@@ -8,6 +9,7 @@ type CardProps = {
 
 const Card = ({ character }: CardProps) => {
   const { status, image, name, species, gender, id } = character
+  const { onClose } = useAppStore()
   return (
     <div className={status === "Alive" ? "" :
       status === "Dead" ? "" : ""}>
@@ -19,12 +21,12 @@ const Card = ({ character }: CardProps) => {
       )}
       </div> */}
       <img className="" src={image} alt="" />
-      <button className="">X</button>
+      <button className="" onClick={() => onClose(id)}>X</button>
 
       <div className="">
         <Link to={`/detail/${id}`}>
           <h2 className="">
-            {name.split(' ').length > "2" ? name.split(' ').slice(0, 2).join(' ') + "..." : name}
+            {name.split(' ').length > 2 ? name.split(' ').slice(0, 2).join(' ') + "..." : name}
           </h2>
         </Link>
         <h2 className="">{status}</h2>
