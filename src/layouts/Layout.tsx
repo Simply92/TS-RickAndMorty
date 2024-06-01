@@ -5,11 +5,11 @@ import Search from "../components/Search"
 const Layout = () => {
     return (
         <>
-            <header className="bg-slate-800">
+            <header className="flex flex-row bg-lime-600">
                 <NavBar />
                 <Search />
             </header>
-            <main className="mt-10 mx-auto max-w-6xl p-10 bg-white shadow">
+            <main>
                 <Outlet />
             </main>
 

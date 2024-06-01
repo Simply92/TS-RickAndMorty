@@ -18,14 +18,18 @@ const Search = () => {
         setId("")
     };
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="flex items-center flex-row w-1/4 justify-evenly" onSubmit={handleSubmit}>
             <input
                 type='search'
                 placeholder='Enter id'
                 value={id}
                 onChange={handleChange}
-                className="" />
-            <button type="submit" className="">Agregar</button>
+                className="bg-rose-200 rounded-md px-2 h-8 text-lg" />
+            <button
+                type="submit"
+                className="bg-yellow-400 rounded-md w-36 h-8 flex items-center justify-center text-lg font-bold border-2 border-black cursor-pinter uppercase"
+            >Agregar
+            </button>
         </form>
     )
 }

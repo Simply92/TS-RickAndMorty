@@ -4,7 +4,7 @@ import Card from './Card'
 const Cards = () => {
     const { characters } = useAppStore()
     return (
-        <div className='grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-4'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-8 p-10 justify-center'>
             {characters.map((character) =>
                 <div key={character.id}>
                     <Card
