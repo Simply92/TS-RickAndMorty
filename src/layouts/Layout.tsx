@@ -1,8 +1,14 @@
 import { Outlet } from "react-router-dom"
 import NavBar from "../components/NavBar"
 import Search from "../components/Search"
+import { useEffect } from "react"
+import { useAppStore } from "../stores/useAppStore"
 
 const Layout = () => {
+    const { loadStorage } = useAppStore()
+    useEffect(() => {
+        loadStorage()
+    }, [])
     return (
         <>
             <header className="flex flex-row bg-lime-600">

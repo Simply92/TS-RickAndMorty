@@ -1,25 +1,41 @@
 
 import { Link } from "react-router-dom"
-import { Character } from "../types"
+import { FavChar } from "../types"
 import { useAppStore } from "../stores/useAppStore"
+import { useEffect, useState } from "react"
 
 type CardProps = {
-  character: Character
+  character: FavChar
 }
 
 const Card = ({ character }: CardProps) => {
   const { status, image, name, species, gender, id } = character
-  const { onClose } = useAppStore()
+  const { onClose, addFav, removeFav, favorite } = useAppStore()
+  const [isFav, setIsFav] = useState(false)
+
+  const handleFavorite = () => {
+    isFav ? removeFav(id) : addFav(character)
+    setIsFav(!isFav)
+  }
+
+  useEffect(() => {
+    favorite.forEach((fav) => {
+      if (fav.id === id) {
+        setIsFav(true);
+      }
+    });
+  }, [favorite]);
+
   return (
     <div className={`w-80 border-[10px] rounded-2xl flex flex-col relative ${status === "Alive" ? "bg-[#3fe216] border-[#3fe216]" :
       status === "Dead" ? "bg-[#ff0800] border-[#ff0800]" : "bg-[#FFD700] border-[#FFD700] "}`}>
-      {/* <div className="">
-      {isFav ? (
-        <button className="" onClick={handleFavorite}>❤️</button>
-      ) : (
-        <button className="" onClick={handleFavorite}>🤍</button>
-      )}
-      </div> */}
+      <div className="">
+        {isFav ? (
+          <button className="" onClick={handleFavorite}>❤️</button>
+        ) : (
+          <button className="" onClick={handleFavorite}>🤍</button>
+        )}
+      </div>
       <img className="rounded-lg" src={image} alt="" />
       <button
         className="absolute top-[-10px] right-[-10px] rounded-full w-8 h-8 bg-black border-none font-extrabold cursor-pointer text-red-500"
