@@ -41,7 +41,6 @@ export const createFavoriteSlice: StateCreator<FavoriteSliceType> = (set, get) =
     },
     loadStorage: () => {
         const storeFavorite = localStorage.getItem('favoritos')
-        console.log(storeFavorite)
         if (storeFavorite) {
             set({
                 favorite: JSON.parse(storeFavorite)

@@ -6,7 +6,7 @@ import Card from "./Card"
 const FavoriteChar = () => {
     const { favorite } = useAppStore()
     const hasFavorites = useMemo(() => favorite.length, [favorite])
-    console.log(favorite)
+
     return (
         <>
             {hasFavorites ? (

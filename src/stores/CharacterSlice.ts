@@ -1,7 +1,7 @@
 import { StateCreator } from "zustand"
 import { getCharacter } from "../services"
 import { Character } from "../types"
-import Swal from "sweetalert2"
+import { Toast } from "../utils/toast"
 
 export type CharacterSliceType = {
     characters: Character[]
@@ -19,9 +19,8 @@ export const createCharacterSlice: StateCreator<CharacterSliceType> = (set, get)
         const newCharacter = await getCharacter(id)
         if (newCharacter) {
             if (get().characterExist(id)) {
-                Swal.fire({
-                    title: "Error",
-                    text: "El personaje esta repetido",
+                Toast.fire({
+                    title: "El personaje esta repetido",
                     icon: "warning"
                 });
             } else {
