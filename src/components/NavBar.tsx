@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom"
 import { useAppStore } from "../stores/useAppStore"
 
 const NavBar = () => {
-    const { fetchCharacter } = useAppStore()
+    const { fetchCharacter, loguot } = useAppStore()
     const { pathname } = useLocation()
 
     const randomCharacter = Math.floor(Math.random() * 826) + 1
@@ -16,6 +16,7 @@ const NavBar = () => {
             <Link className={pathname === '/home' ? buttonActive : buttonNoActive} to='/home'>Home</Link>
             <Link className={pathname === '/favorites' ? buttonActive : buttonNoActive} to='/favorites'>Favoritos</Link>
             <Link
+                onClick={() => loguot()}
                 className="text-lg font-bold bg- rounded-md w-36 h-8 flex items-center justify-center 
                 border-2 border-black bg-red-600 uppercase cursor-pointer" to='/'>
                 Cerrar sesión

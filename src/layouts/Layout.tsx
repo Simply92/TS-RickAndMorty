@@ -5,8 +5,7 @@ import { useEffect } from "react"
 import { useAppStore } from "../stores/useAppStore"
 
 const Layout = () => {
-    const { loadStorage, status } = useAppStore()
-    console.log(status)
+    const { loadStorage } = useAppStore()
 
     useEffect(() => {
         loadStorage()

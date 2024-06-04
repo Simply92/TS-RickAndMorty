@@ -7,6 +7,7 @@ export type UserSliceType = {
     user: User | null
     status: boolean
     userLogin: (userData: User) => Promise<void>
+    loguot: () => void
 }
 
 export const createUserSlice: StateCreator<UserSliceType> = (set) => ({
@@ -28,5 +29,14 @@ export const createUserSlice: StateCreator<UserSliceType> = (set) => ({
                 icon: "error"
             })
         }
+    },
+    loguot: () => {
+        set(() => ({
+            status: false
+        }))
+        Toast.fire({
+            title: "Sesión finalizada",
+            icon: "info"
+        })
     }
 })

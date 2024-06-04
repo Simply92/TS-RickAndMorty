@@ -9,13 +9,13 @@ import { useAppStore } from "./stores/useAppStore"
 
 const ProtectedRoute = ({ element }) => {
   const { status } = useAppStore()
-  console.log(status)
-  return status ? element : <Navigate to="/login" />
+  return status ? element : <Navigate to="/" />
 }
 
 const App = createBrowserRouter([
   {
-    path: '/login',
+    index: true,
+    path: '/',
     element: <LoginView />
   },
   {
