@@ -1,6 +1,6 @@
 import axios from "axios";
-import { Character, FavChar } from "../types";
-import { CharacterAPI, CharactersFav } from "../utils";
+import { Character, FavChar, User } from "../types";
+import { CharacterAPI, CharactersFav, UserData } from "../utils";
 const url = import.meta.env.VITE_BACK_URL
 
 export const getCharacter = async (id: Character['id']) => {
@@ -23,10 +23,16 @@ export const postFav = async (character: FavChar) => {
 export const deleteFav = async (id: Character['id']) => {
     const endpoint = `${url}/rickandmorty/fav/${id}`
     const { data } = await axios.delete(endpoint)
-    console.log(data)
     const result = CharactersFav.safeParse(data)
-    console.log(result)
     if (result.success) {
         return result.data
     }
+}
+
+export const login = async (userData: User) => {
+    UserData.parse(userData)
+    const endpoint = `${url}/rickandmorty/login`;
+    const { data } = await axios.post(endpoint, userData)
+    const { access } = data
+    return access
 }

@@ -31,3 +31,8 @@ export const CharacterFav = z.object({
 })
 
 export const CharactersFav = z.array(CharacterFav)
+
+export const UserData = z.object({
+    email: z.string(),
+    password: z.string()
+})
