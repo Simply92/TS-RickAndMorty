@@ -5,9 +5,13 @@ import Detail from "./views/Detail"
 import Favorite from "./views/Favorite"
 import LoginView from "./views/LoginView"
 import { useAppStore } from "./stores/useAppStore"
+import { ReactNode } from "react"
 
+interface ProtectedRouteProps {
+  element: ReactNode
+}
 
-const ProtectedRoute = ({ element }) => {
+const ProtectedRoute = ({ element }: ProtectedRouteProps) => {
   const { status } = useAppStore()
   return status ? element : <Navigate to="/" />
 }
