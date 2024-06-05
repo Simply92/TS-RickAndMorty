@@ -1,11 +1,18 @@
-import { useMemo } from "react"
+import { useEffect, useMemo } from "react"
 import { useAppStore } from "../stores/useAppStore"
 import Card from "./Card"
 
 
 const FavoriteChar = () => {
-    const { favorite } = useAppStore()
+    const { favorite, user, getFav } = useAppStore()
     const hasFavorites = useMemo(() => favorite.length, [favorite])
+    console.log(favorite)
+
+    useEffect(() => {
+        if (user) {
+            (getFav(user));
+        }
+    }, []);
 
     return (
         <>

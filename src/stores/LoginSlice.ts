@@ -8,21 +8,24 @@ export type UserSliceType = {
     status: boolean
     userLogin: (userData: User) => Promise<void>
     loguot: () => void
+    localLogin: () => void
 }
 
-export const createUserSlice: StateCreator<UserSliceType> = (set) => ({
+export const createUserSlice: StateCreator<UserSliceType> = (set, get) => ({
     user: null,
     status: false,
     userLogin: async (userData) => {
         const newUser = await login(userData)
         if (newUser) {
             set(() => ({
-                status: true
+                status: true,
+                user: userData
             }))
             Toast.fire({
                 title: "Bienvenido",
                 icon: "success"
             })
+            localStorage.setItem('user', JSON.stringify(get().user))
         } else {
             Toast.fire({
                 title: "Datos incorrectos",
@@ -32,11 +35,20 @@ export const createUserSlice: StateCreator<UserSliceType> = (set) => ({
     },
     loguot: () => {
         set(() => ({
-            status: false
+            status: false,
+            user: null
         }))
         Toast.fire({
             title: "Sesión finalizada",
             icon: "info"
         })
+    },
+    localLogin: () => {
+        const storeLogin = localStorage.getItem('user')
+        if (storeLogin) {
+            set({
+                user: JSON.parse(storeLogin)
+            })
+        }
     }
 })

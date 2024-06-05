@@ -11,17 +11,29 @@ export const getCharacter = async (id: Character['id']) => {
     }
 }
 
-export const postFav = async (character: FavChar) => {
+export const postFav = async (character: FavChar, user: User) => {
+    const { email } = user
     const endpoint = `${url}/rickandmorty/fav`
-    const { data } = await axios.post(endpoint, character)
+    const { data } = await axios.post(endpoint, { character, email })
     const result = CharactersFav.safeParse(data)
     if (result.success) {
         return result.data
     }
 }
 
-export const deleteFav = async (id: Character['id']) => {
-    const endpoint = `${url}/rickandmorty/fav/${id}`
+export const getFavorite = async (user: User) => {
+    const { email } = user
+    const endpoint = `${url}/rickandmorty/getFav/${email}`
+    const { data } = await axios(endpoint)
+    const result = CharactersFav.safeParse(data)
+    if (result.success) {
+        return result.data
+    }
+}
+
+export const deleteFav = async (id: Character['id'], user: User) => {
+    const { email } = user
+    const endpoint = `${url}/rickandmorty/fav/${id}?user=${email}`
     const { data } = await axios.delete(endpoint)
     const result = CharactersFav.safeParse(data)
     if (result.success) {

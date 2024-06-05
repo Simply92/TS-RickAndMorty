@@ -10,13 +10,15 @@ type CardProps = {
 
 const Card = ({ character }: CardProps) => {
   const { status, image, name, species, gender, id } = character
-  const { onClose, addFav, removeFav, favorite } = useAppStore()
+  const { onClose, addFav, removeFav, favorite, user } = useAppStore()
   const [isFav, setIsFav] = useState(false)
   const { pathname } = useLocation()
 
   const handleFavorite = () => {
-    isFav ? removeFav(id) : addFav(character)
-    setIsFav(!isFav)
+    if (user) {
+      isFav ? removeFav(id, user) : addFav(character, user)
+      setIsFav(!isFav)
+    }
   }
 
   useEffect(() => {
