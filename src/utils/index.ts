@@ -36,3 +36,10 @@ export const UserData = z.object({
     email: z.string(),
     password: z.string()
 })
+
+export const RegisterData = z.object({
+    name: z.string(),
+    lastname: z.string(),
+    email: z.string(),
+    password: z.string()
+})

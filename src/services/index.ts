@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Character, FavChar, User } from "../types";
+import { Character, FavChar, Register, User } from "../types";
 import { CharacterAPI, CharactersFav, UserData } from "../utils";
 const url = import.meta.env.VITE_BACK_URL
 
@@ -47,4 +47,11 @@ export const login = async (userData: User) => {
     const { data } = await axios.post(endpoint, userData)
     const { access } = data
     return access
+}
+
+export const register = async (formData: Register) => {
+    const endpoint = `${url}/rickandmorty/register`
+    const { data } = await axios.post(endpoint, formData)
+    const { created } = data
+    return created
 }

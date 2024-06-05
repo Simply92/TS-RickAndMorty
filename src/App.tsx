@@ -6,6 +6,7 @@ import Favorite from "./views/Favorite"
 import LoginView from "./views/LoginView"
 import { useAppStore } from "./stores/useAppStore"
 import { ReactNode } from "react"
+import Register from "./views/Register"
 
 interface ProtectedRouteProps {
   element: ReactNode
@@ -21,6 +22,10 @@ const App = createBrowserRouter([
     index: true,
     path: '/',
     element: <LoginView />
+  },
+  {
+    path: '/register',
+    element: <Register />
   },
   {
     path: '/',
