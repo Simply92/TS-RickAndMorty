@@ -16,7 +16,6 @@ export const createUserSlice: StateCreator<UserSliceType> = (set, get) => ({
     status: false,
     userLogin: async (userData) => {
         const newUser = await login(userData)
-        console.log(newUser)
         if (newUser.access === true) {
             set(() => ({
                 status: true,
