@@ -6,14 +6,19 @@ import { Toast } from "../utils/toast";
 
 export type FavoriteSliceType = {
     favorite: FavChar[]
+    allCharacter: FavChar[]
     addFav: (character: FavChar, user: User) => void
     removeFav: (id: number, user: User) => Promise<void>
     getFav: (user: User) => Promise<void>
+    filter: (value: string) => void
+    order: (value: string) => void
+    reset: () => void
     loadStorage: () => void
 }
 
 export const createFavoriteSlice: StateCreator<FavoriteSliceType> = (set, get) => ({
     favorite: [] as FavChar[],
+    allCharacter: [] as FavChar[],
     addFav: async (character, user) => {
         const fav = await postFav(character, user)
         if (fav) {
@@ -27,7 +32,8 @@ export const createFavoriteSlice: StateCreator<FavoriteSliceType> = (set, get) =
         const fav = await getFavorite(user)
         if (fav) {
             set(() => ({
-                favorite: fav
+                favorite: fav,
+                allCharacter: fav
             }))
         }
         localStorage.setItem('favoritos', JSON.stringify(get().favorite))
@@ -36,7 +42,8 @@ export const createFavoriteSlice: StateCreator<FavoriteSliceType> = (set, get) =
         const fav = await deleteFav(id, user)
         if (fav) {
             set(() => ({
-                favorite: fav
+                favorite: fav,
+                allCharacter: fav
             }))
             Toast.fire({
                 icon: "error",
@@ -44,6 +51,31 @@ export const createFavoriteSlice: StateCreator<FavoriteSliceType> = (set, get) =
             })
         }
         localStorage.setItem('favoritos', JSON.stringify(get().favorite))
+    },
+    filter: (value) => {
+        if (value) {
+            set((state) => ({
+                favorite: state.allCharacter.filter((char) => char.gender === value)
+            }))
+        }
+    },
+    order: (value) => {
+        if (value) {
+            set((state) => {
+                const sortFavortites = [...state.allCharacter]
+                sortFavortites.sort((a, b) =>
+                    value === "A" ? a.id - b.id : b.id - a.id
+                )
+                return {
+                    favorite: sortFavortites
+                }
+            })
+        }
+    },
+    reset: () => {
+        set((state) => ({
+            favorite: state.allCharacter
+        }))
     },
     loadStorage: () => {
         const storeFavorite = localStorage.getItem('favoritos')
