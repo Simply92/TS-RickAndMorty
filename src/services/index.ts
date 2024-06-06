@@ -45,8 +45,7 @@ export const login = async (userData: User) => {
     UserData.parse(userData)
     const endpoint = `${url}/rickandmorty/login`;
     const { data } = await axios.post(endpoint, userData)
-    const { access } = data
-    return access
+    return data
 }
 
 export const register = async (formData: Register) => {

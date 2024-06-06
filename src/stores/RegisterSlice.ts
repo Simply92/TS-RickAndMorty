@@ -23,7 +23,7 @@ export const createRegisterSlice: StateCreator<RegisterSliceType> = (set) => ({
             }))
         } else {
             Toast.fire({
-                title: "Error al crear usuario",
+                title: "El correo ya esta registrado",
                 icon: "error"
             })
         }

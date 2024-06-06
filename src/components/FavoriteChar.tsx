@@ -6,7 +6,6 @@ import Card from "./Card"
 const FavoriteChar = () => {
     const { favorite, user, getFav } = useAppStore()
     const hasFavorites = useMemo(() => favorite.length, [favorite])
-    console.log(favorite)
 
     useEffect(() => {
         if (user) {
@@ -25,7 +24,7 @@ const FavoriteChar = () => {
                         />
                     ))}
                 </div>) : (
-                <p className="my-10 text-center text-2xl">Los favoritos se mostrarán aquí</p>
+                <p className="my-10 text-center text-2xl text-white">Los favoritos se mostrarán aquí</p>
             )}
         </>
     )

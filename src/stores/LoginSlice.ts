@@ -16,7 +16,8 @@ export const createUserSlice: StateCreator<UserSliceType> = (set, get) => ({
     status: false,
     userLogin: async (userData) => {
         const newUser = await login(userData)
-        if (newUser) {
+        console.log(newUser)
+        if (newUser.access === true) {
             set(() => ({
                 status: true,
                 user: userData
@@ -27,10 +28,20 @@ export const createUserSlice: StateCreator<UserSliceType> = (set, get) => ({
             })
             localStorage.setItem('user', JSON.stringify(get().user))
         } else {
-            Toast.fire({
-                title: "Datos incorrectos",
-                icon: "error"
-            })
+            if (newUser.info === 'User not found') {
+                Toast.fire({
+                    title: "El usuario no existe",
+                    icon: "error"
+                })
+            } else {
+                Toast.fire({
+                    title: "Contraseña incorrecta",
+                    icon: "error"
+                })
+            }
+            set(() => ({
+                status: false
+            }))
         }
     },
     loguot: () => {
