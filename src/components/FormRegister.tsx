@@ -30,14 +30,14 @@ const FormRegister = () => {
         navigate("/");
     };
 
-    const label = "text-xl text-white mt-3 font-semibold"
-    const input = "p-1 border-none text-lg font-semibold text-black w-[400px] rounded-md bg-[rgb(250,325,215)]"
-    const button = "mx-8 my-4 text-center text-lg font-semibold bg-blue-700 text-white rounded-md px-2"
+    const label = "text-white mt-3 font-semibold"
+    const input = "p-1 bg-antiquewhite border-none font-semibold text-black w-[400px] rounded-md"
+    const button = "uppercase my-3 text-center font-semibold bg-green rounded-md px-2"
     return (
         <div className="mt-40 flex justify-center">
             <form
                 onSubmit={handleSubmit}
-                className="bg-[rgba(0,0,0,0.7)] flex text-center items-center flex-col w-1/2 py-16">
+                className="bg-[rgba(0,0,0,0.7)] text-2xl flex text-center items-center flex-col w-1/2 py-16">
                 <label className={label}>Nombre:</label>
                 <input
                     className={input}
@@ -70,10 +70,10 @@ const FormRegister = () => {
                     value={formData.password}
                     onChange={handleChange}
                 />
-                <div className="flex">
-                    <button className={button}>Registrarse</button>
-                    <button className={button} onClick={handleGoBack}>Volver al Login</button>
-                </div>
+
+                <button className={button}>Registrarse</button>
+                <button className={button} onClick={handleGoBack}>Volver al Login</button>
+
             </form >
         </div >
     );

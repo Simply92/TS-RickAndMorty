@@ -21,7 +21,7 @@ const NavBar = () => {
                 border-2 border-black bg-red-600 uppercase cursor-pointer" to='/'>
                 Cerrar sesión
             </Link>
-            <button onClick={() => fetchCharacter(randomCharacter)} className={buttonNoActive}>Random</button>
+            <button onClick={() => fetchCharacter(randomCharacter)} className={buttonNoActive}>Aleatorio</button>
         </div>
     )
 }

@@ -14,17 +14,21 @@ const Login = () => {
         setuserData({ ...userData, [event.target.name]: event.target.value })
 
     };
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        userLogin(userData)
+        await userLogin(userData)
+        setuserData({
+            email: "",
+            password: ""
+        })
     }
     useEffect(() => {
         status && navigate('/home');
     }, [status]);
 
-    const label = "text-white mt-10"
-    const input = "bg-antiquewhite rounded-sm w-96 px-2 py-1"
-    const button = "mt-4 w-32 rounded-sm text-center mt-2 bg-green uppercase"
+    const label = "text-white my-4"
+    const input = "bg-antiquewhite rounded-md w-96 px-2 p-1 justify-center"
+    const button = "mt-4 rounded-md text-center mt-2 bg-green uppercase px-2"
 
     return (
         <div className="text-2xl flex justify-center font-semibold">
@@ -38,7 +42,7 @@ const Login = () => {
                 <label
                     htmlFor="email"
                     className={label}
-                >E-mail</label>
+                >Correo</label>
                 <input
                     value={userData.email}
                     type="email"
@@ -49,7 +53,7 @@ const Login = () => {
                 <label
                     htmlFor="password"
                     className={label}
-                >Password</label>
+                >Contraseña</label>
                 <input
                     value={userData.password}
                     type="password"
@@ -57,9 +61,9 @@ const Login = () => {
                     name="password"
                     className={input}
                 />
-                <button className={button}>Login</button>
+                <button className={button}>Iniciar sesión</button>
                 <Link to='/register'>
-                    <button className={button}>Register</button>
+                    <button className={button}>Registrarse</button>
                 </Link>
             </form>
         </div>
