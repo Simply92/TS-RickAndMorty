@@ -25,7 +25,7 @@ export const createUserSlice: StateCreator<UserSliceType> = (set, get) => ({
                 title: "Bienvenido",
                 icon: "success"
             })
-            localStorage.setItem('user', JSON.stringify(get().user))
+            localStorage.setItem('status', JSON.stringify(get().status))
         } else {
             if (newUser.info === 'User not found') {
                 Toast.fire({
@@ -38,9 +38,6 @@ export const createUserSlice: StateCreator<UserSliceType> = (set, get) => ({
                     icon: "error"
                 })
             }
-            set(() => ({
-                status: false
-            }))
         }
     },
     loguot: () => {
@@ -54,10 +51,10 @@ export const createUserSlice: StateCreator<UserSliceType> = (set, get) => ({
         })
     },
     localLogin: () => {
-        const storeLogin = localStorage.getItem('user')
+        const storeLogin = localStorage.getItem('status')
         if (storeLogin) {
             set({
-                user: JSON.parse(storeLogin)
+                status: JSON.parse(storeLogin)
             })
         }
     }
